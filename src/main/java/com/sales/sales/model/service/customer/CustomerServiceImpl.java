@@ -8,6 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.sales.sales.model.entity.Customer;
 import com.sales.sales.model.repository.ICustomerDao;
 
+import jakarta.persistence.Tuple;
+
 @Service
 public class CustomerServiceImpl implements ICustomerService {
 
@@ -24,9 +26,8 @@ public class CustomerServiceImpl implements ICustomerService {
     }
 
     @Override
-    public List<Customer> findCustomersAndTheirOrders() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findCustomersAndTheirOrders'");
+    public List<Tuple> findCustomersAndTheirOrders() {
+        return this.repo.findCustomersAndTheirOrders();
     }
 
     @Override

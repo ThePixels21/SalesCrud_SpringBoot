@@ -12,9 +12,43 @@
         rel="stylesheet">
     <title>All customers and orders</title>
 </head>
+
 <body>
     <nav th:replace="base/navbar :: nav_bar"></nav>
     <br>
-    <div class="container"></div>
+    <div class="container">
+        <div class="row">
+            <h1>All Customers and orders</h1>
+        </div>
+        <div class="row">
+            <table class="table table-striped table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Name</th>
+                        <th>First Surname</th>
+                        <th>Second Surname</th>
+                        <th>City</th>
+                        <th>Category</th>
+                        <th>Order id</th>
+                        <th>Quantity</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="row : ${list}">
+                        <td th:text="${row.get('cname')}"></td>
+                        <td th:text="${row.get('clastname1')}"></td>
+                        <td th:text="${row.get('clastname2')}"></td>
+                        <td th:text="${row.get('city')}"></td>
+                        <td th:text="${row.get('category')}"></td>
+                        <td th:text="${row.get('id')}"></td>
+                        <td th:text="${row.get('quantity')}"></td>
+                        <td th:text="${row.get('date')}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </body>
+
 </html>

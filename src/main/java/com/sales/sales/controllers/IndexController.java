@@ -18,7 +18,7 @@ public class IndexController {
 
     @GetMapping({"", "/", "/index"})
     public String listCustomersAndOrders(Model model) {
-        model.addAttribute("list", null);
+        model.addAttribute("list", repo.findCustomersAndTheirOrders());
         return "index";
     }
 

@@ -4,11 +4,13 @@ import java.util.List;
 
 import com.sales.sales.model.entity.Customer;
 
+import jakarta.persistence.Tuple;
+
 public interface ICustomerService {
 
     public List<Customer> getCustomers();
 
-    public List<Customer> findCustomersAndTheirOrders();
+    public List<Tuple> findCustomersAndTheirOrders();
 
     public void saveCustomer(Customer customer);
 
