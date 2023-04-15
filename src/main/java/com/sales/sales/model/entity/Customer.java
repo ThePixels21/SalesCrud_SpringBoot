@@ -6,6 +6,7 @@ import java.util.List;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Data
@@ -20,16 +21,20 @@ public class Customer implements Serializable {
     private Long id;
 
     @NotEmpty
+    @Size(max = 100)
     @Column(nullable = false, length = 100)
     private String name;
 
     @NotEmpty
+    @Size(max = 100)
     @Column(name = "last_Name_1", nullable = false, length = 100)
     private String lastName1;
 
+    @Size(max = 100)
     @Column(name = "last_Name_2", nullable = true, length = 100)
     private String lastName2;
 
+    @Size(max = 100)
     @Column(nullable = true, length = 100)
     private String city;
 
