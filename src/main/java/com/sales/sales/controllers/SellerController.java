@@ -1,5 +1,6 @@
 package com.sales.sales.controllers;
 
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,8 +25,9 @@ public class SellerController {
     }
 
     @GetMapping({"", "/"})
-    public String listSellers(Model model) {
-        model.addAttribute("sellers", sellerService.getSellers());
+    public String listSellers(Model model, @Param("keyword") String keyword) {
+        model.addAttribute("sellers", sellerService.getSellers(keyword));
+        model.addAttribute("keyword", keyword);
         return "sellers/sellers";
     }
 

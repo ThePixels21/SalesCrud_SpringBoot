@@ -19,7 +19,10 @@ public class SellerServiceImpl implements ISellerService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<Seller> getSellers() {
+    public List<Seller> getSellers(String keyword) {
+        if(keyword != null) {
+            return this.repo.findByName(keyword);
+        }
         return this.repo.findAll();
     }
 
@@ -43,5 +46,5 @@ public class SellerServiceImpl implements ISellerService {
     public void deleteSeller(Long id) {
         this.repo.deleteById(id);
     }
-    
+
 }

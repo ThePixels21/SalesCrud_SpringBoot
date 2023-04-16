@@ -6,7 +6,7 @@ import com.sales.sales.model.entity.Seller;
 
 public interface ISellerService {
     
-    public List<Seller> getSellers();
+    public List<Seller> getSellers(String keyword);
 
     public void saveSeller(Seller seller);
 

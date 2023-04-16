@@ -12,8 +12,8 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "sellers", indexes = { @Index(name = "index_name_seller", columnList = "name"),
-        @Index(name = "index_name_lastname_seller", columnList = "name, last_Name_1"),
-        @Index(name = "index_fullname_seller", columnList = "name, last_Name_1, last_Name_2") })
+        @Index(name = "index_name_lastname_seller", columnList = "name, last_name_1"),
+        @Index(name = "index_fullname_seller", columnList = "name, last_name_1, last_name_2") })
 public class Seller implements Serializable {
 
     @Id
@@ -27,11 +27,11 @@ public class Seller implements Serializable {
 
     @NotEmpty
     @Size(max = 100)
-    @Column(name = "last_Name_1", nullable = false, length = 100)
+    @Column(name = "last_name_1", nullable = false, length = 100)
     private String lastName1;
 
     @Size(max = 100)
-    @Column(name = "last_Name_2", nullable = true, length = 100)
+    @Column(name = "last_name_2", nullable = true, length = 100)
     private String lastName2;
 
     @Size(max = 100)
