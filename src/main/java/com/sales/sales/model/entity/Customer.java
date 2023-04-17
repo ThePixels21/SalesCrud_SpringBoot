@@ -13,7 +13,8 @@ import lombok.Data;
 @Entity
 @Table(name = "customers", indexes = { @Index(name = "index_name_customer", columnList = "name"),
         @Index(name = "index_name_lastname1_customer", columnList = "name, last_name_1"),
-        @Index(name = "index_fullname_customer", columnList = "name, last_name_1, last_name_2") })
+        @Index(name = "index_fullname_customer", columnList = "name, last_name_1, last_name_2"),
+        @Index(name = "index_category_customer", columnList = "category") })
 public class Customer implements Serializable {
 
     @Id

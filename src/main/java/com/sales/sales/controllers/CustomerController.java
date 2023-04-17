@@ -25,8 +25,11 @@ public class CustomerController {
     }
 
     @GetMapping({ "", "/" })
-    public String listCustomers(Model model, @Param("keyword") String keyword) {
+    public String listCustomers(Model model, @Param("keyword") String keyword,
+            @Param("categoryNumber") String categoryNumber) {
+        model.addAttribute("categories", customerService.getCategories());
         model.addAttribute("keyword", keyword);
+        model.addAttribute("categoryNumber", categoryNumber);
         if (keyword != null && validateNumbers(keyword)) {
             Customer customer = null;
             try {
@@ -39,8 +42,11 @@ public class CustomerController {
                 model.addAttribute("customer", customer);
                 return "customers/update";
             }
+        } else if (categoryNumber != null && !categoryNumber.isEmpty()) {
+            model.addAttribute("customers", customerService.getCustomersByCategory(categoryNumber));
+        } else {
+            model.addAttribute("customers", customerService.getCustomers(keyword));
         }
-        model.addAttribute("customers", customerService.getCustomers(keyword));
         return "customers/customers";
     }
 
@@ -92,4 +98,5 @@ public class CustomerController {
     private boolean validateNumbers(String data) {
         return data.matches("[0-9]*");
     }
+
 }

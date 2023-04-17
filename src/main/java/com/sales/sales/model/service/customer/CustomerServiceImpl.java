@@ -57,5 +57,15 @@ public class CustomerServiceImpl implements ICustomerService {
     public Customer getCustomerById(Long id) {
         return this.repo.findById(id).orElse(null);
     }
+
+    @Override
+    public List<String> getCategories() {
+        return this.repo.getCategories();
+    }
+
+    @Override
+    public List<Customer> getCustomersByCategory(String categoryNumber) {
+        return this.repo.getCustomersByCategory(categoryNumber);
+    }
     
 }

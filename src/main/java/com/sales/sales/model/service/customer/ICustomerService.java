@@ -20,4 +20,8 @@ public interface ICustomerService {
 
     public void deleteCustomer(Long id);
 
+    public List<String> getCategories();
+
+    public List<Customer> getCustomersByCategory(String categoryNumber);
+
 }
