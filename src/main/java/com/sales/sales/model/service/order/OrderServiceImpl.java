@@ -2,6 +2,7 @@ package com.sales.sales.model.service.order;
 
 import java.util.List;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,8 +20,11 @@ public class OrderServiceImpl implements IOrderService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<Order> getOrders() {
-        return this.repo.findAll();
+    public List<Order> getOrders(Double quantity) {
+        if(quantity != null) {
+            return this.repo.getOrdersByQuantity(quantity);
+        }
+        return this.repo.findAll(Sort.by(Sort.Direction.DESC, "id"));
     }
 
     @Override

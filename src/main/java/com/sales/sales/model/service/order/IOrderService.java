@@ -6,7 +6,7 @@ import com.sales.sales.model.entity.Order;
 
 public interface IOrderService {
     
-    public List<Order> getOrders();
+    public List<Order> getOrders(Double quantity);
 
     public void saveOrder(Order order);
 
