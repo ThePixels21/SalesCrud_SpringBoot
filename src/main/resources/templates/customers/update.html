@@ -90,6 +90,7 @@
                             <th>Date</th>
                             <th>Seller Name</th>
                             <th>Seller Last Name</th>
+                            <th>Options</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -99,6 +100,10 @@
                             <td th:text="*{date}"></td>
                             <td th:text="*{seller.name}"></td>
                             <td th:text="*{seller.lastName1}"></td>
+                            <td>
+                                <a th:href="@{/orders/update/{id}(id=*{id})}" class="btn btn-info">Manage</a>
+                                <a th:href="@{/orders/delete/{id}(id=*{id})}" class="btn btn-danger">Delete</a>
+                            </td>
                         </tr>
                     </tbody>
                 </table>

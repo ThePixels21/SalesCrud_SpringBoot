@@ -1,5 +1,7 @@
 package com.sales.sales.controllers;
 
+import java.util.ArrayList;
+
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,20 +35,27 @@ public class OrderController {
     @GetMapping({ "", "/" })
     public String listOrders(Model model, @Param("quantity") Double quantity, @Param("id") Long id) {
         model.addAttribute("quantity", quantity);
+        model.addAttribute("id", id);
         if (id != null) {
-            Order order = null;
-            try {
-                order = orderService.getOrderById(id);
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-                return "redirect:/orders";
-            }
+            Order order = orderService.getOrderById(id);
             if (order != null) {
                 model.addAttribute("order", order);
                 return "orders/update";
+            } else {
+                model.addAttribute("orders", new ArrayList<Order>());
             }
+        }else {
+            model.addAttribute("orders", orderService.getOrders(quantity));
         }
-        model.addAttribute("orders", orderService.getOrders(quantity));
+        model.addAttribute("date1", new String());
+        model.addAttribute("date2", new String());
+        return "orders/orders";
+    }
+
+    @PostMapping("/datefilter")
+    public String getDateFilter(String date1, String date2, Model model) {
+        model.addAttribute("orders", orderService.getOrdersByDate(date1, date2));
+        model.addAttribute("activatebtn", true);
         return "orders/orders";
     }
 

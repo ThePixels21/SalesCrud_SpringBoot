@@ -28,6 +28,12 @@ public class OrderServiceImpl implements IOrderService {
     }
 
     @Override
+    @Transactional(readOnly = true)
+    public List<Order> getOrdersByDate(String date1, String date2) {
+        return this.repo.getOrdersByDate(date1, date2);
+    }
+
+    @Override
     @Transactional
     public void saveOrder(Order order) {
         this.repo.save(order);

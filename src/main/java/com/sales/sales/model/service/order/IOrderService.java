@@ -8,6 +8,8 @@ public interface IOrderService {
     
     public List<Order> getOrders(Double quantity);
 
+    public List<Order> getOrdersByDate(String date1, String date2);
+
     public void saveOrder(Order order);
 
     public Order getOrderById(Long id);
