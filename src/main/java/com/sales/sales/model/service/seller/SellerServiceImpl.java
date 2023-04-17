@@ -2,6 +2,7 @@ package com.sales.sales.model.service.seller;
 
 import java.util.List;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,7 +24,7 @@ public class SellerServiceImpl implements ISellerService {
         if(keyword != null) {
             return this.repo.findByName(keyword);
         }
-        return this.repo.findAll();
+        return this.repo.findAll(Sort.by(Sort.Direction.DESC, "id"));
     }
 
     @Override

@@ -10,7 +10,7 @@
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
-    <title>Manage Seller</title>
+    <title>Manage Customer</title>
 </head>
 
 <body>
@@ -19,9 +19,9 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
-                <h1 class="text-center">Update Seller</h1>
+                <h1 class="text-center">Update Customer</h1>
                 <div class="card-body">
-                    <form th:action="@{/sellers/update/{id}(id=${seller.id})}" th:object="${seller}" method="POST">
+                    <form th:action="@{/customers/update/{id}(id=${customer.id})}" th:object="${customer}" method="POST">
 
                         <div class="form-group">
                             <label>Id: </label>
@@ -59,28 +59,28 @@
                         </div>
 
                         <div class="form-group">
-                            <label>Commission: </label>
-                            <input type="number" name="commission" th:field="*{commission}" class="form-control"
-                                placeholder="Type the commission">
-                            <span class="text-danger" th:if="${#fields.hasErrors('commission')}"
-                                th:errors="*{commission}"></span>
+                            <label>Category: </label>
+                            <input type="number" name="category" th:field="*{category}" class="form-control"
+                                placeholder="Type the category">
+                            <span class="text-danger" th:if="${#fields.hasErrors('category')}"
+                                th:errors="*{category}"></span>
                         </div>
 
                         <div class="box-footer">
                             <button class="btn btn-success">Update</button>
-                            <a th:if="*{orders.isEmpty}" th:href="@{/sellers/delete/{id}(id=*{id})}" class="btn btn-danger">Delete</a>
+                            <a th:if="*{orders.isEmpty}" th:href="@{/customers/delete/{id}(id=*{id})}" class="btn btn-danger">Delete</a>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
         <div class="row justify-content-center">
-            <div th:if="${seller.orders.isEmpty}">
+            <div th:if="${customer.orders.isEmpty}">
                 <br>
                 <h4 class="text-center">No orders to show</h4>
                 <br>
             </div>
-            <div th:if="not ${seller.orders.isEmpty}">
+            <div th:if="not ${customer.orders.isEmpty}">
                 <h1 class="text-center">Orders</h1>
                 <table class="table table-striped table-bordered">
                     <thead class="table-dark">
@@ -88,17 +88,17 @@
                             <th>Id</th>
                             <th>Quantity</th>
                             <th>Date</th>
-                            <th>Customer Name</th>
-                            <th>Customer Last Name</th>
+                            <th>Seller Name</th>
+                            <th>Seller Last Name</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr th:each="order : ${seller.orders}" th:object="${order}">
+                        <tr th:each="order : ${customer.orders}" th:object="${order}">
                             <td th:text="*{id}"></td>
                             <td th:text="*{quantity}"></td>
                             <td th:text="*{date}"></td>
-                            <td th:text="*{customer.name}"></td>
-                            <td th:text="*{customer.lastName1}"></td>
+                            <td th:text="*{seller.name}"></td>
+                            <td th:text="*{seller.lastName1}"></td>
                         </tr>
                     </tbody>
                 </table>

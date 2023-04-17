@@ -10,7 +10,7 @@
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
-    <title>Sellers</title>
+    <title>Customers</title>
 </head>
 
 <body>
@@ -20,15 +20,15 @@
     <div class="container">
         <div class="row">
             <div>
-                <h1>Sellers List</h1>
+                <h1>Customers List</h1>
             </div>
             <div class="ml-auto">
-                <h1><a th:href="@{/sellers/register}" class="btn btn-info">Register</a></h1>
+                <h1><a th:href="@{/customers/register}" class="btn btn-info">Register</a></h1>
             </div>
         </div>
         <br>
         <div class="row">
-            <form class="form-inline" th:action="@{/sellers}">
+            <form class="form-inline" th:action="@{/customers}">
                 <div class="form-group mb-2">
                     <label for="">Filter by</label>
                 </div>
@@ -37,7 +37,7 @@
                         placeholder="Type name, surname or id" requiered>
                 </div>
                 <input type="submit" class="btn btn-info mb-2 mr-2" value="Search">
-                <a th:if="${keyword!=null}" class="btn btn-secondary mb-2" th:href="@{/sellers}">Clean</a>
+                <a th:if="${keyword!=null}" class="btn btn-secondary mb-2" th:href="@{/customers}">Clean</a>
             </form>
         </div>
         <br>
@@ -49,28 +49,28 @@
                         <th>Second Surname</th>
                         <th>Name</th>
                         <th>City</th>
-                        <th>Commission</th>
+                        <th>Category</th>
                         <th>Id</th>
                         <th>Options</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="seller : ${sellers}" th:object="${seller}">
+                    <tr th:each="customer : ${customers}" th:object="${customer}">
                         <td th:text="*{lastName1}"></td>
                         <td th:text="*{lastName2}"></td>
                         <td th:text="*{name}"></td>
                         <td th:text="*{city}"></td>
-                        <td th:text="*{commission}"></td>
+                        <td th:text="*{category}"></td>
                         <td th:text="*{id}"></td>
                         <td>
-                            <a th:href="@{/sellers/update/{id}(id=*{id})}" class="btn btn-info">Manage</a>
-                            <a th:if="*{orders.isEmpty}" th:href="@{/sellers/delete/{id}(id=*{id})}" class="btn btn-danger">Delete</a>
+                            <a th:href="@{/customers/update/{id}(id=*{id})}" class="btn btn-info">Manage</a>
+                            <a th:if="*{orders.isEmpty}" th:href="@{/customers/delete/{id}(id=*{id})}" class="btn btn-danger">Delete</a>
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
-        <div th:if="${sellers.isEmpty}" class="row justify-content-center">
+        <div th:if="${customers.isEmpty}" class="row justify-content-center">
             <h4>Empty search</h4>
         </div>
     </div>

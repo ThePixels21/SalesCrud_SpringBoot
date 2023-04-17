@@ -2,6 +2,7 @@ package com.sales.sales.model.service.customer;
 
 import java.util.List;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,8 +22,11 @@ public class CustomerServiceImpl implements ICustomerService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<Customer> getCustomers() {
-        return this.repo.findAll();
+    public List<Customer> getCustomers(String keyword) {
+        if(keyword != null) {
+            return this.repo.findByName(keyword);
+        }
+        return this.repo.findAll(Sort.by(Sort.Direction.DESC, "id"));
     }
 
     @Override

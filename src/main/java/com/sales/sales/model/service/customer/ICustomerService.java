@@ -8,7 +8,7 @@ import jakarta.persistence.Tuple;
 
 public interface ICustomerService {
 
-    public List<Customer> getCustomers();
+    public List<Customer> getCustomers(String keyword);
 
     public List<Tuple> findCustomersAndTheirOrders();
 
