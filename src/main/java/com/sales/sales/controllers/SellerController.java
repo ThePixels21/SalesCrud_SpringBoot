@@ -17,17 +17,30 @@ import jakarta.validation.Valid;
 @Controller
 @RequestMapping("sellers")
 public class SellerController {
-    
+
     private ISellerService sellerService;
 
     public SellerController(ISellerService sellerService) {
         this.sellerService = sellerService;
     }
 
-    @GetMapping({"", "/"})
+    @GetMapping({ "", "/" })
     public String listSellers(Model model, @Param("keyword") String keyword) {
-        model.addAttribute("sellers", sellerService.getSellers(keyword));
         model.addAttribute("keyword", keyword);
+        if (keyword != null && validateNumbers(keyword)) {
+            Seller seller = null;
+            try {
+                seller = sellerService.getSellerById((Long.parseLong(keyword)));
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+                return "redirect:/sellers";
+            }
+            if (seller != null) {
+                model.addAttribute("seller", seller);
+                return "sellers/update";
+            }
+        }
+        model.addAttribute("sellers", sellerService.getSellers(keyword));
         return "sellers/sellers";
     }
 
@@ -39,7 +52,7 @@ public class SellerController {
 
     @PostMapping("/register")
     public String saveSeller(@Valid Seller seller, BindingResult result) {
-        if(result.hasErrors()) {
+        if (result.hasErrors()) {
             return "sellers/register";
         }
         sellerService.saveSeller(seller);
@@ -54,7 +67,7 @@ public class SellerController {
 
     @PostMapping("/update/{id}")
     public String updateSeller(@PathVariable Long id, @Valid Seller seller, BindingResult result, Model model) {
-        if(result.hasErrors()) {
+        if (result.hasErrors()) {
             model.addAttribute("seller", sellerService.getSellerById(id));
             return "sellers/update";
         }
@@ -74,6 +87,10 @@ public class SellerController {
     public String deleteSeller(@PathVariable Long id) {
         sellerService.deleteSeller(id);
         return "redirect:/sellers";
+    }
+
+    private boolean validateNumbers(String data) {
+        return data.matches("[0-9]*");
     }
 
 }

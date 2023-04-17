@@ -19,50 +19,60 @@
     <br>
     <div class="container">
         <div class="row">
-            <div class="col-11">
+            <div>
                 <h1>Sellers List</h1>
             </div>
-            <div class="col-1">
-                <h1><a th:href="@{/sellers/register}" class="btn btn-info btn-sm align-items-center">Register</a></h1>
+            <div class="ml-auto">
+                <h1><a th:href="@{/sellers/register}" class="btn btn-info">Register</a></h1>
             </div>
         </div>
         <br>
-        <form class="form-inline" th:action="@{/sellers}">
-            <div class="form-group mb-2">
-                <label for="">Filter by</label>
-            </div>
-            <div class="form-group mx-sm-3 mb-2">
-                <input type="text" name="keyword" class="form-control" id="keyword" th:value="${keyword}" placeholder="Type name or surname" requiered>
-            </div>
-            <input type="submit" class="btn btn-info mb-2 mr-2" value="Search">
-            <a th:if="${keyword!=null}" class="btn btn-secondary mb-2" th:href="@{/sellers}">Clean</a>
-        </form>
+        <div class="row">
+            <form class="form-inline" th:action="@{/sellers}">
+                <div class="form-group mb-2">
+                    <label for="">Filter by</label>
+                </div>
+                <div class="form-group mx-sm-3 mb-2">
+                    <input type="text" name="keyword" class="form-control" id="keyword" th:value="${keyword}"
+                        placeholder="Type name, surname or id" requiered>
+                </div>
+                <input type="submit" class="btn btn-info mb-2 mr-2" value="Search">
+                <a th:if="${keyword!=null}" class="btn btn-secondary mb-2" th:href="@{/sellers}">Clean</a>
+            </form>
+        </div>
         <br>
-        <table class="table table-striped table-bordered">
-            <thead class="table-dark">
-                <tr>
-                    <th>Name</th>
-                    <th>First Surname</th>
-                    <th>Second Surname</th>
-                    <th>City</th>
-                    <th>Commission</th>
-                    <th>Options</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="seller : ${sellers}" th:object="${seller}">
-                    <td th:text="*{name}"></td>
-                    <td th:text="*{lastName1}"></td>
-                    <td th:text="*{lastName2}"></td>
-                    <td th:text="*{city}"></td>
-                    <td th:text="*{commission}"></td>
-                    <td>
-                        <a th:href="@{/sellers/update/{id}(id=*{id})}" class="btn btn-info">Manage</a>
-                        <a th:href="@{/sellers/delete/{id}(id=*{id})}" class="btn btn-danger">Delete</a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="row">
+            <table class="table table-striped table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                        <th>First Surname</th>
+                        <th>Second Surname</th>
+                        <th>Name</th>
+                        <th>City</th>
+                        <th>Commission</th>
+                        <th>Id</th>
+                        <th>Options</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="seller : ${sellers}" th:object="${seller}">
+                        <td th:text="*{lastName1}"></td>
+                        <td th:text="*{lastName2}"></td>
+                        <td th:text="*{name}"></td>
+                        <td th:text="*{city}"></td>
+                        <td th:text="*{commission}"></td>
+                        <td th:text="*{id}"></td>
+                        <td>
+                            <a th:href="@{/sellers/update/{id}(id=*{id})}" class="btn btn-info">Manage</a>
+                            <a th:href="@{/sellers/delete/{id}(id=*{id})}" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div th:if="${sellers.isEmpty}" class="row justify-content-center">
+            <h4>Empty search</h4>
+        </div>
     </div>
 
 </body>

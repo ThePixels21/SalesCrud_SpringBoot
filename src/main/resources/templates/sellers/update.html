@@ -77,7 +77,8 @@
         <div class="row justify-content-center">
             <div th:if="${seller.orders.isEmpty}">
                 <br>
-                <h3 class="text-center">No orders to show</h3>
+                <h4 class="text-center">No orders to show</h4>
+                <br>
             </div>
             <div th:if="not ${seller.orders.isEmpty}">
                 <h1 class="text-center">Orders</h1>

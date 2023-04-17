@@ -10,6 +10,6 @@ import com.sales.sales.model.entity.Seller;
 
 @Repository
 public interface ISellerDao extends JpaRepository<Seller, Long> {
-    @Query("SELECT s FROM Seller s WHERE CONCAT(s.name, ' ', s.lastName1, ' ', s.lastName2) LIKE %?1%")
+    @Query("SELECT s FROM Seller s WHERE CONCAT(s.lastName1, ' ', s.lastName2, ' ', s.name) LIKE %?1%")
     public List<Seller> findByName(String keyword);
 }
