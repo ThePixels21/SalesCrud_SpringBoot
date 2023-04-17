@@ -30,6 +30,7 @@ public class CustomerServiceImpl implements ICustomerService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Tuple> findCustomersAndTheirOrders() {
         return this.repo.findCustomersAndTheirOrders();
     }
@@ -41,18 +42,20 @@ public class CustomerServiceImpl implements ICustomerService {
     }
 
     @Override
-    public Customer getCustomerById(Long id) {
-        return this.repo.findById(id).orElse(null);
-    }
-
-    @Override
+    @Transactional
     public Customer updateCustomer(Customer customer) {
         return this.repo.save(customer);
     }
 
     @Override
+    @Transactional
     public void deleteCustomer(Long id) {
         this.repo.deleteById(id);
+    }
+
+    @Override
+    public Customer getCustomerById(Long id) {
+        return this.repo.findById(id).orElse(null);
     }
     
 }

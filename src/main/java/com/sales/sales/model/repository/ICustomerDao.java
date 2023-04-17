@@ -18,6 +18,6 @@ public interface ICustomerDao extends JpaRepository<Customer, Long> {
             nativeQuery = true)
     public List<Tuple> findCustomersAndTheirOrders();
 
-    @Query("SELECT c FROM Customer c WHERE CONCAT(c.lastName1, ' ', c.lastName2, ' ', c.name) LIKE %?1%")
+    @Query("SELECT c FROM Customer c WHERE CONCAT(c.lastName1, ' ', c.lastName2, ' ', c.name) LIKE %?1% ORDER BY c.id DESC")
     public List<Customer> findByName(String keyword);
 }

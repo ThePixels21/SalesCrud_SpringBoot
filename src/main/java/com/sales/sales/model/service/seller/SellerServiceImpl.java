@@ -34,18 +34,20 @@ public class SellerServiceImpl implements ISellerService {
     }
 
     @Override
-    public Seller getSellerById(Long id) {
-        return this.repo.findById(id).orElse(null);
-    }
-
-    @Override
+    @Transactional
     public Seller updateSeller(Seller seller) {
         return this.repo.save(seller);
     }
 
     @Override
+    @Transactional
     public void deleteSeller(Long id) {
         this.repo.deleteById(id);
+    }
+
+    @Override
+    public Seller getSellerById(Long id) {
+        return this.repo.findById(id).orElse(null);
     }
 
 }
